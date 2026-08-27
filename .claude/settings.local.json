@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /tmp/claude-1000/-home-domingo-Escritorio-Iphone-Lobos/4ae26902-0783-4870-a036-36de1e22abed/scratchpad/omniroute-src)",
+      "Bash(curl -sL https://github.com/diegosouzapw/OmniRoute/archive/refs/heads/main.tar.gz -o repo.tar.gz)",
+      "Bash(tar xzf *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" https://api.github.com/repos/anomalyco/opencode/releases/latest)",
+      "Bash(curl -s https://api.github.com/repos/anomalyco/opencode/releases/latest)",
+      "Bash(curl -s https://formulae.brew.sh/api/formula/opencode.json)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(d.get\\('versions'\\)\\)\")",
+      "Bash(npm install *)",
+      "Bash(npm audit *)",
+      "Bash(npm view *)",
+      "Bash(python3 -c \"import json,sys; v=json.load\\(sys.stdin\\); print\\('\\\\n'.join\\(v[-15:]\\)\\)\")",
+      "Bash(npm ls *)",
+      "Bash(npm run *)"
+    ]
+  }
+}
