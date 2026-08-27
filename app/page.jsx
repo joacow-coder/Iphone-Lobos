@@ -16,8 +16,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 
-// TODO: reemplazar por el número real de WhatsApp del local (formato: código de país + área + número, sin espacios ni "+").
-const WHATSAPP_NUMBER = '5492227123456';
+const WHATSAPP_NUMBER = '5492227419010';
 
 const whatsappLink = (message) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
