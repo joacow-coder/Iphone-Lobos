@@ -13,9 +13,8 @@ import {
   MessageCircle,
   Instagram,
   Facebook,
-  ShieldCheck,
 } from 'lucide-react';
-import Hero3D from '../components/Hero3D';
+import Hero from '../components/Hero';
 import ProductCard from '../components/ProductCard';
 import ProductModal from '../components/ProductModal';
 import { PRODUCTS } from '../data/products';
@@ -137,41 +136,8 @@ export default function Home() {
         )}
       </header>
 
-      {/* Hero Section */}
-      <section id="inicio" className="mx-auto max-w-6xl px-6 pb-10 pt-24 md:pt-32">
-        <div className="glass-panel-strong mx-auto max-w-3xl rounded-3xl p-10 text-center shadow-glow md:p-16">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-medium text-violet-300">
-            <ShieldCheck size={14} />
-            Servicio técnico especializado en Lobos
-          </span>
-          <h1 className="text-glow text-4xl font-semibold tracking-tight text-white md:text-6xl">
-            Tu iPhone, como nuevo.
-          </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base text-white/60 md:text-lg">
-            Reparación, mantenimiento y venta de iPhones con repuestos de calidad,
-            diagnóstico transparente y garantía real.
-          </p>
-          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-            <a
-              href={whatsappLink('Hola! Quiero solicitar un presupuesto para mi iPhone.')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-white px-8 py-3 text-sm font-medium text-black shadow-lg transition hover:bg-white/90"
-            >
-              Solicitar Presupuesto
-            </a>
-            <a
-              href="#catalogo"
-              className="rounded-full border border-white/15 bg-white/5 px-8 py-3 text-sm font-medium text-white backdrop-blur-md transition hover:bg-white/10"
-            >
-              Ver Catálogo
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Héroe 3D interactivo */}
-      <Hero3D />
+      {/* Hero con revelado 3D ligado al scroll */}
+      <Hero whatsappLink={whatsappLink} />
 
       {/* Servicios de Reparación */}
       <section id="reparaciones" className="mx-auto max-w-6xl px-6 py-16">
