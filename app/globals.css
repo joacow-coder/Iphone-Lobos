@@ -7,5 +7,31 @@ html {
 }
 
 body {
-  @apply bg-slate-50 text-slate-800;
+  @apply bg-black text-white;
+  background: #000000;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.35);
+  border-radius: 9999px;
+}
+
+.glass-panel {
+  @apply border border-white/10 bg-white/5 backdrop-blur-md;
+}
+
+.glass-panel-strong {
+  @apply border border-white/10 bg-white/[0.07] backdrop-blur-xl;
+}
+
+.text-glow {
+  text-shadow: 0 0 30px rgba(139, 92, 246, 0.35);
 }
