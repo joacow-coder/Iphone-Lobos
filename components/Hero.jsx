@@ -1,11 +1,11 @@
 'use client';
 
 import { Suspense, useEffect, useRef, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Environment, ContactShadows } from '@react-three/drei';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { MessageCircle, ShieldCheck } from 'lucide-react';
-import PhoneModel from './PhoneModel';
+import PhoneGLTF from './PhoneGLTF';
 
 const lerp = (a, b, t) => a + (b - a) * t;
 
@@ -16,10 +16,10 @@ function RevealPhone({ progress }) {
     if (!groupRef.current) return;
     const p = progress.get();
 
-    // Phase 1 [0, 0.25]: stays a small, mostly-static peek above the card
+    // Phase 1 [0, 0.3]: stays a small, mostly-static peek above the card
     // while the card itself fades out — this is the part that must never
     // visually fight with the headline text.
-    // Phase 2 [0.25, 0.9]: card is long gone, so the model is free to grow,
+    // Phase 2 [0.3, 0.9]: card is long gone, so the model is free to grow,
     // descend slightly and complete its 360° turn into full view.
     let y;
     let scale;
@@ -40,7 +40,21 @@ function RevealPhone({ progress }) {
     groupRef.current.rotation.x = Math.sin(rotY * 0.5) * 0.05;
   });
 
-  return <PhoneModel ref={groupRef} />;
+  return <PhoneGLTF ref={groupRef} />;
+}
+
+/** With frameloop="demand" nothing renders unless invalidated. The model's
+ * transform is entirely a function of scroll position, so a single
+ * invalidate() per scroll change is all the render loop ever needs. */
+function ScrollInvalidator({ progress }) {
+  const invalidate = useThree((state) => state.invalidate);
+
+  useEffect(() => {
+    invalidate();
+    return progress.on('change', () => invalidate());
+  }, [progress, invalidate]);
+
+  return null;
 }
 
 /** Mounts the Canvas only while the hero is near the viewport, so the
@@ -86,6 +100,7 @@ export default function Hero({ whatsappLink }) {
         {isNear && (
           <motion.div style={{ opacity: canvasOpacity }} className="absolute inset-0">
             <Canvas
+              frameloop="demand"
               camera={{ position: [0, 0, 7], fov: 30 }}
               dpr={[1, 1.5]}
               gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
@@ -94,11 +109,14 @@ export default function Hero({ whatsappLink }) {
               <pointLight position={[3, 3, 3]} intensity={45} color="#8b5cf6" />
               <pointLight position={[-3, -1.5, 2]} intensity={28} color="#3b82f6" />
               <directionalLight position={[0, 4, 5]} intensity={0.6} color="#ffffff" />
-              {/* Phone renders immediately; the environment HDRI streams in
-                  separately so a slow network never blocks the scroll-linked model. */}
-              <RevealPhone progress={scrollYProgress} />
+              <ScrollInvalidator progress={scrollYProgress} />
               <Suspense fallback={null}>
-                <Environment preset="night" />
+                <RevealPhone progress={scrollYProgress} />
+              </Suspense>
+              {/* Environment loads independently so a slow network never
+                  blocks the scroll-linked model from appearing. */}
+              <Suspense fallback={null}>
+                <Environment preset="city" />
               </Suspense>
               <ContactShadows
                 position={[0, -1.7, 0]}

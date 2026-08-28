@@ -65,7 +65,7 @@ export default function ProductModal({ product, onClose, whatsappLink }) {
             </button>
 
             <div className="relative h-72 bg-cosmic-radial md:h-auto">
-              <ProductCanvas accentColor="#8b5cf6" />
+              <ProductCanvas />
               <span className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 text-[11px] uppercase tracking-[0.25em] text-white/40">
                 Arrastrá para girar
               </span>

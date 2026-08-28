@@ -233,8 +233,22 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-white/10 bg-black/40 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-white/50 md:flex-row">
-          <p>© {new Date().getFullYear()} iPhone Lobos. Todos los derechos reservados.</p>
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-8 text-sm text-white/50 md:flex-row">
+          <div className="text-center md:text-left">
+            <p>© {new Date().getFullYear()} iPhone Lobos. Todos los derechos reservados.</p>
+            <p className="mt-1 text-xs text-white/30">
+              Modelo 3D por{' '}
+              <a
+                href="https://sketchfab.com/3d-models/iphone-17-pro-4541aa8a28324b33a2baaf81d263aaec"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-white/50"
+              >
+                Ranguel
+              </a>{' '}
+              (Sketchfab, CC BY 4.0)
+            </p>
+          </div>
           <div className="flex items-center gap-4">
             <a
               href="https://instagram.com"
